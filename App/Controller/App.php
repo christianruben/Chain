@@ -7,12 +7,7 @@ class App extends Controller{
 		
 	}
 	public function index(){
-        if($this->req->session->userdata("islogged")){
-            $this->res->render("main", array("title"=>"Main"));
-        }else{
-            // $this->res->redirect("login");
-            echo "SA";
-        }
+        $this->res->render("home", array("title"=>"Main"));
     }
     public function main(){
     	echo "Main";
