@@ -12,12 +12,16 @@ class PDODriver extends Database{
 
     protected function connect(){
         if($this->db == null){
-            $this->db = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=$this->charset", $this->username, $this->password);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        	try{
+	            $this->db = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=$this->charset", $this->username, $this->password);
+	            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        	}catch(PDOException $e){
+        		die($e->getMessage());
+        	}
         }
     }
 
-	public function getConnection(){
+	private function getConnection(){
 		if($this->db === null){
 			$this->connect();
 		}
@@ -30,7 +34,7 @@ class PDODriver extends Database{
     }
     
 	//execute insert data to table
-	public function insertTable($tablename,$columsname,$value){
+	public function insert($tablename,$columsname,$value){
 		$colums = "";
 		$values = "";
 		$ic = 0;
@@ -71,12 +75,13 @@ class PDODriver extends Database{
 			}catch(PDOException $e){
 				$e->getMessage();
 				$this->close();
+				return $result;
 			}
 		}
 	}
 
 	// execute select table
-	public function selectTable($tablename,$where,$value){
+	public function select($tablename,$where,$value){
 		$result = null;
 		try{
 			$db 	  = $this->getConnection();
@@ -92,8 +97,9 @@ class PDODriver extends Database{
 			unset($db);
 			return $result;
 		}catch(PDOException $e){
-				$e->getMessage();
-				$this->close();
+			$e->getMessage();
+			$this->close();
+			return $result;
 		}
 	}
 
@@ -111,11 +117,12 @@ class PDODriver extends Database{
 		} catch (PDOException $e) {
 			$e->getMessage();
 			$this->close();
+			return $result;
 		}
 	}
 
 	//execute select table with specific colums
-	public function selectColumsTable($colums,$table,$where,$value){
+	public function selectColumns($colums,$table,$where,$value){
 		$colum  = "";
 		$ic 	  = 0;
 		$result = null;
@@ -146,6 +153,7 @@ class PDODriver extends Database{
 			}catch(PDOException $e){
 				$e->getMessage();
 				$this->close();
+				return $result;
 			}
 		}
 	}
@@ -190,6 +198,7 @@ class PDODriver extends Database{
 			}catch(PDOException $e){
 				$e->getMessage();
 				$this->close();
+				return $result;
 			}
 		}
 	}
@@ -226,6 +235,7 @@ class PDODriver extends Database{
 				}catch(PDOException $e){
 					$e->getMessage();
 					$this->close();
+					return $result;
 				}
 			}
 		}

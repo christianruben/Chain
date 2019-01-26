@@ -16,13 +16,44 @@ function auto_loader($class){
 	});
 
 	$path = ROOT . DS . join( $parts, DS ). '.php';
-	if(file_exists($path))
+	if(file_exists($path)){
 		require( $path );
+		if(!class_exists($class)){
+			header("HTTP/1.1 500 Internal Server Error");
+			die("
+				<!Doctype html>
+				<html>
+					<head>
+						<title>
+							500 : Internal Server Error
+						</title>
+					</head>
+					<body>
+						<h1 style='color:red'>500 : Internal Server Error</h1>
+					</body>
+				</html>
+				");
+		}
+	}else{
+			header("HTTP/1.1 500 Internal Server Error");
+			die("
+				<!Doctype html>
+				<html>
+					<head>
+						<title>
+							500 : Internal Server Error
+						</title>
+					</head>
+					<body>
+						<h1 style='color:red'>500 : Internal Server Error</h1>
+					</body>
+				</html>
+				");
+	}
 }
 
 if ( ! function_exists('is_cli'))
 {
-
 	/**
 	 * Is CLI?
 	 *

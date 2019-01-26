@@ -2,6 +2,7 @@
 
 namespace System;
 use System\View;
+use System\Controller as Ctrl;
 class Core{
 	protected $uri;
 	protected $_c;
@@ -43,16 +44,11 @@ class Core{
 		if(!file_exists($path)){
 			$this->_c = $this->_404;
 		}
-
 		$class = "App\\Controller\\".$this->_c;
 		$this->loadClass = new $class();
 		if(!method_exists($this->loadClass, $this->_m)){
-			$this->_c = $this->_404;
 			$this->_m = "index";
 		}
-		$class = "App\\Controller\\".$this->_c;
-		$this->loadClass = new $class();
-
 		$this->LoadRender();
 	}
 
