@@ -7,7 +7,7 @@ class Admin extends Controller{
 		
 	}
 	public function index(){
-        $this->res->render("main", array("title"=>"Main"));
+        $this->res->render("admin-page/admin-home", array("title"=>"Main"));
     }
     
     public function login(){
@@ -16,5 +16,42 @@ class Admin extends Controller{
         }else{
             $this->res->redirect("");
         }
+    }
+
+    public function authentication(){
+        if($this->req->getMethod() == "POST"){
+            $username = $this->req->Post("identity");
+            $password = $this->req->Post("keysecret");
+            $redirect = $this->req->Get("redirect");
+            if(trim($username) !== "" && trim($password) !== ""){
+                $password = md5($password);
+                /**
+                 * put username and password
+                 * to model to matching data in database
+                 */
+
+                 if($authenticated){
+                    $this->req->session->set_userdata(
+                        array(
+                            "islogged"=>true,
+                            "user_id"=>$admin['user_id'],
+                            "username"=>$admin['username'],
+                            "fullname"=>$admin['fullname'],
+                            "level"=>$admin['level']
+                            )
+                    );
+                    $this->res->json(array("status"=>200, "res"=> array("authenticated"=> true, "redirect"=> $redirect == null ? "/" : $redirect)));
+                 }else{
+                    $this->res->json(array("status"=>200, "res"=> array("authenticated"=> false, "msg"=> $authenticated_msg)));
+                 }
+            }else{
+                $this->res->json(array("status"=>200, "res"=> array("authenticated"=> false, "msg"=> "Username or Password is empty")));
+            }
+        }
+    }
+
+    public function logout(){
+        $this->req->session->destroy();
+        $this->res->redirect("");
     }
 }

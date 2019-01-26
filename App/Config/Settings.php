@@ -15,8 +15,8 @@ $database = array(
 	"dbdriver"=>"pdo",
 	"hostname" => "localhost",
 	"username" => "root",
-	"password" => "weita",
-	"dbname" => "hrm",
+	"password" => "",
+	"dbname" => "cmd",
 	"charset" => "utf8",
 	"collate" => "utf8_general_ci",
 	"encrypt" => FALSE,
@@ -34,5 +34,5 @@ $autoload = array(
 );
 
 $session = array(
-	"timeout"=>10
+	"timeout"=>60*60
 );
