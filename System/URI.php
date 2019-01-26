@@ -95,6 +95,23 @@ class URI{
 		return $args ? implode('/', $args) : '';
 	}
 
+	private function get_main_path(){
+		$doc_root = strtolower($_SERVER['DOCUMENT_ROOT']);
+		$script_file = strtolower($_SERVER['SCRIPT_FILENAME']);
+		$folder_app = str_replace($doc_root, '', $script_file);
+		$path = explode('/', $folder_app);
+		array_pop($path);
+		array_pop($path);
+		return implode("/", $path);
+	}
+
+	protected function get_request_uri(){
+		$req_uri = strtolower($_SERVER['REQUEST_URI']);
+		$url_request = str_replace($this->get_main_path(), '', $req_uri);
+		$url_request = preg_replace('/[\/]+$/', '', $url_request);
+		return $url_request;
+	}
+
 	protected function _parse_request_uri(){
 		if(!isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME'])){
 			return '';
@@ -103,7 +120,10 @@ class URI{
 		$uri = parse_url("http://localhost".$_SERVER['REQUEST_URI']);
 		$query = isset($uri['query']) ? $uri['query'] : '';
 		$uri = isset($uri['path']) ? $uri['path'] : '';
-
+		$doc_root = strtolower($_SERVER['DOCUMENT_ROOT']);
+		$script_file = strtolower($_SERVER['SCRIPT_FILENAME']);
+		$uri = $this->get_request_uri();
+		
 		if(isset($_SERVER['SCRIPT_NAME'][0])){
 			if(strpos($uri, $_SERVER['SCRIPT_NAME']) === 0){
 				$uri = (string) substr($uri, strlen($_SERVER['SCRIPT_NAME']));

@@ -18,4 +18,12 @@ class Routes{
 			$this->_callbacks[] = $callback;
 		}
 	}
+
+	public function run(){
+		foreach ($this->_routelist as $key => $value) {
+			if(is_string($this->_callbacks[$key])){
+				
+			}
+		}
+	}
 }

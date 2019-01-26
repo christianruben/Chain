@@ -31,7 +31,6 @@ class Core{
 		$this->_c = ucfirst(strtolower($this->uri->getMainPath()));
 		$this->_m = strtolower($this->uri->getSecondPath());
 		$this->_p = $this->uri->getParamsPaths();
-
 		if(empty($this->_c)){
 			$this->_c = $this->_default;
 		}
@@ -39,7 +38,6 @@ class Core{
 		if(empty($this->_m)){
 			$this->_m = "index";
 		}
-
 		$path = APP.DS.'Controller'.DS.$this->_c.".php";
 		if(!file_exists($path)){
 			$this->_c = $this->_404;
@@ -47,7 +45,7 @@ class Core{
 		$class = "App\\Controller\\".$this->_c;
 		$this->loadClass = new $class();
 		if(!method_exists($this->loadClass, $this->_m)){
-			$this->_m = "index";
+			$this->_m = "NotFound";
 		}
 		$this->LoadRender();
 	}

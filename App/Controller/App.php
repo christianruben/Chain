@@ -2,9 +2,9 @@
 namespace App\Controller;
 use System\Controller as Controller;
 
-class Ap extends Controller{
+class App extends Controller{
 	public function __construct(){
-		echo "JELL";
+		
 	}
 	public function index(){
         if($this->req->session->userdata("islogged")){
@@ -13,5 +13,8 @@ class Ap extends Controller{
             // $this->res->redirect("login");
             echo "SA";
         }
+    }
+    public function main(){
+    	echo "Main";
     }
 }

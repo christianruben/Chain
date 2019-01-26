@@ -1,12 +1,6 @@
 <?php
 
-require "./App/Config/Settings.php";
-
-defined("ROOT") ?: define("ROOT", (dirname(__DIR__)));
-defined("DS") ?: define("DS", "/");
-defined("APP") ?: define("APP", ROOT.DS.'App');
-defined("LIBRARY") ?: define("LIBRARY", APP. 'Library');
-defined("MAINURL") ?: define("MAINURL", str_replace($_SERVER["DOCUMENT_ROOT"], "", ROOT));
+require ROOT."/App/Config/Settings.php";
 
 function auto_loader($class){
 	$parts = explode("\\", $class);

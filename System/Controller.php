@@ -31,4 +31,8 @@ class Controller{
 		$this->$name = $class;
 		$this->$name->setDB($this->dbsetting);
 	}
+	public function NotFound(){
+		$this->res->status(404);
+		$this->res->render("page404", array("title"=>"404"));
+	}
 }
