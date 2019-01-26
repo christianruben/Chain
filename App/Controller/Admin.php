@@ -9,9 +9,7 @@ class Admin extends Controller{
 	public function index(){
         $this->res->render("main", array("title"=>"Main"));
     }
-    public function main(){
-    	echo "Main";
-    }
+    
     public function login(){
         if(!$this->req->session->userdata("islogged")){
             $this->res->render("login-page", array("title"=>"Login"));

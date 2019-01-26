@@ -1,7 +1,6 @@
 {{include header}}
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
-
   <!-- Automatic Slideshow Images -->
   <div class="mySlides w3-display-container w3-center">
     <img src="/w3images/la.jpg" style="width:100%">
