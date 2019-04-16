@@ -7,7 +7,11 @@ class Admin extends Controller{
 		
 	}
 	public function index(){
-        $this->res->render("admin-page/admin-home", array("title"=>"Main"));
+        if($this->req->session->userdata("islogged")){
+            $this->res->render("adminpage/admin-home", array("title"=>"Main"));
+        }else{
+            $this->res->redirect("login");
+        }
     }
     
     public function login(){

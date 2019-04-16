@@ -48,7 +48,7 @@ class View{
 	}
 
 	public function redirect($path){
-		$url = str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]);
+		$url = str_replace("public/index.php", "", $_SERVER["SCRIPT_NAME"]);
 		header("Location: ".$url.$path);
 	}
 }

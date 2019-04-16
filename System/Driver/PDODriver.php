@@ -195,10 +195,11 @@ class PDODriver extends Database{
 				$exe->execute($valupdate);
 				$this->close();
 				unset($db);
+				return true;
 			}catch(PDOException $e){
 				$e->getMessage();
 				$this->close();
-				return $result;
+				return false;
 			}
 		}
 	}

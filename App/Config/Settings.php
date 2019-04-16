@@ -1,7 +1,7 @@
 <?php
 
 $path = array(
-	"base" => "", /*url to take*/
+	"base" => "/sla/Chain", /*url to take*/
 	"index_page" => "index.php", /*first file is execute. if u use mod_rewrite remove make it blank.*/
 	"url_suffix" => "",
 	"charset" => "UTF-8",
@@ -25,7 +25,7 @@ $database = array(
 );
 
 $route = array(
-	"default" => "App",
+	"default" => "Admin",
 	"404" => "Page404",
 );
 
